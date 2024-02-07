@@ -58,6 +58,11 @@ end
 M.show = vim.schedule_wrap(function(actions, should_confirm, cb)
   -- The schedule wrap ensures that we actually enter the floating window.
   -- Not sure why it doesn't work without that
+  if config.skip_all_confirms then
+    cb(true)
+    return
+  end
+
   if should_confirm == false or #actions == 0 then
     cb(true)
     return
